@@ -1,0 +1,103 @@
+@import 'tailwindcss';
+@import 'leaflet/dist/leaflet.css';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../views/**/*.blade.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif;
+    --color-obsidian: #0b0f17;
+    --color-card-dark: #131b2a;
+    --color-card-border: rgba(30, 58, 138, 0.35);
+}
+
+/* Custom dark scrollbar */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #0b0f17;
+}
+::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+}
+
+/* Leaflet container styling */
+.dark-tiles {
+    background: #0b0f17;
+}
+
+/* Custom Leaflet popup styling */
+.leaflet-popup-content-wrapper {
+    background: #0f172a !important;
+    background-color: #0f172a !important;
+    color: #f8fafc !important;
+    border: 1px solid rgba(59, 130, 246, 0.4) !important;
+    border-radius: 14px !important;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 8px 10px -6px rgba(0, 0, 0, 0.7) !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+}
+.leaflet-popup-content {
+    margin: 0 !important;
+    line-height: 1.4 !important;
+    color: #f8fafc !important;
+}
+.leaflet-popup-tip {
+    background: #0f172a !important;
+    background-color: #0f172a !important;
+    border: 1px solid rgba(59, 130, 246, 0.4) !important;
+}
+.leaflet-container a.leaflet-popup-close-button {
+    color: #94a3b8 !important;
+    padding: 6px 10px 0 0 !important;
+    font-size: 18px !important;
+    font-weight: bold !important;
+    z-index: 10;
+}
+.leaflet-container a.leaflet-popup-close-button:hover {
+    color: #ffffff !important;
+}
+.leaflet-container {
+    font-family: inherit !important;
+}
+
+/* Custom Leaflet marker icons */
+.custom-customer-icon,
+.custom-therapist-icon {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+}
+
+/* Pin pulse animation */
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.9);
+        opacity: 0.9;
+    }
+    50% {
+        transform: scale(1.4);
+        opacity: 0.3;
+    }
+    100% {
+        transform: scale(1.8);
+        opacity: 0;
+    }
+}
+.pin-pulse::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 9999px;
+    background: rgba(239, 68, 68, 0.4);
+    animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    z-index: -1;
+}
