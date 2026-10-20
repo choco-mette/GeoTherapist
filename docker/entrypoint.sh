@@ -27,10 +27,17 @@ mkdir -p /app/storage/framework/cache/data \
 chown -R www-data:www-data /app/storage /app/bootstrap/cache
 chmod -R 775 /app/storage /app/bootstrap/cache
 
+# Ensure .env file exists inside container so artisan never crashes
+if [ ! -f /app/.env ]; then
+    touch /app/.env
+fi
+
 # Generate APP_KEY if missing
 if [ -z "$APP_KEY" ]; then
     echo "APP_KEY is missing. Generating new key..."
-    php artisan key:generate --force --no-interaction
+    NEW_KEY=$(php artisan key:generate --show --no-interaction)
+    export APP_KEY="$NEW_KEY"
+    echo "APP_KEY=$NEW_KEY" >> /app/.env
 fi
 
 # Run database migrations if enabled
